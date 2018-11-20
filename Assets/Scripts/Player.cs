@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 	Rigidbody2D playerRigid;
+	public Vector3 offset;
 	public bool canJump = true;
 	public float jumpForce = 5;
 	// Use this for initialization
@@ -14,8 +15,8 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		Debug.DrawRay(transform.position,Vector3.down*1.1f ,Color.red);
-		RaycastHit2D hitGround = Physics2D.Raycast(transform.position, Vector2.down, 1.1f,1 << 8);
+		Debug.DrawRay(transform.position+offset,Vector3.down*1.1f ,Color.red);
+		RaycastHit2D hitGround = Physics2D.Raycast(transform.position+offset, Vector2.down, 1.1f,1 << 8);
 		// Debug.
 
 			if (hitGround.collider != null)
