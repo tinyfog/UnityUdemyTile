@@ -154,7 +154,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 0
-    functionName: ReadyJumpBegin
+    functionName: RunningLimitBegin
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -168,7 +168,21 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.33333334
-    functionName: ReadyJumpEnd
+    functionName: RunningLimitEnd
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.9166667
+    functionName: RunningLimitBegin
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.4166666
+    functionName: RunningLimitEnd
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

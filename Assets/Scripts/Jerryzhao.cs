@@ -10,13 +10,16 @@ public class Jerryzhao : MonoBehaviour
     public bool canJump = true;
     public float jumpForce = 5;
     Animator _anim;
+    SpriteRenderer playerSprite;
+    bool faceRight = true;
 
-    bool readyJump = false;
+    bool runningLimit = false;
     // Use this for initialization
     void Start()
     {
         playerRigid = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
+        playerSprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class Jerryzhao : MonoBehaviour
     {
 
         Debug.DrawRay(transform.position + offset, Vector3.down * 1.1f, Color.red);
+        FaceDirection();
         Move();
         JumpAnim();
     }
@@ -34,7 +38,7 @@ public class Jerryzhao : MonoBehaviour
 
         if (hitGround.collider != null)
         {
-            Debug.Log("hitGround is " + hitGround.collider.gameObject.name);
+            // Debug.Log("hitGround is " + hitGround.collider.gameObject.name);
             canJump = true;
         }
 
@@ -45,23 +49,32 @@ public class Jerryzhao : MonoBehaviour
         }
     }
 
+    void FaceDirection(){
+        if(Input.GetAxisRaw("Horizontal")>=0){faceRight = true;Debug.Log("I'm facing right");}
+        else{ faceRight =false;}
+    }
     void JumpAction()
     {
+        if(faceRight == false){playerSprite.flipX = true;}
+        else{playerSprite.flipX = false;}
         playerRigid.velocity = new Vector2(playerRigid.velocity.x, jumpForce);
-        Debug.Log("jumpForce is " + jumpForce);
+        // Debug.Log("jumpForce is " + jumpForce);
         canJump = false;
     }
-    void ReadyJumpBegin(){
-        readyJump = true;
+    void RunningLimitBegin(){
+        runningLimit = true;
     }
-    void ReadyJumpEnd(){
-        readyJump = false;
+    void RunningLimitEnd(){
+        runningLimit = false;
     }
     void Move()
     {
-        if(!readyJump){
+        if(!runningLimit){
         float move = Input.GetAxisRaw("Horizontal") * speed;
-        _anim.SetFloat("move", move);
+        Debug.Log("my move value is " + move);
+        if(faceRight == false){playerSprite.flipX = true;}
+        else{playerSprite.flipX = false;}
+        _anim.SetFloat("move", Mathf.Abs(move));
         playerRigid.velocity = new Vector2(move, playerRigid.velocity.y);
         }
 
