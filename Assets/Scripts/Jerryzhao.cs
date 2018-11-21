@@ -30,6 +30,7 @@ public class Jerryzhao : MonoBehaviour
         FaceDirection();
         Move();
         JumpAnim();
+        Attack();
     }
 
     void JumpAnim()
@@ -50,8 +51,8 @@ public class Jerryzhao : MonoBehaviour
     }
 
     void FaceDirection(){
-        if(Input.GetAxisRaw("Horizontal")>=0){faceRight = true;Debug.Log("I'm facing right");}
-        else{ faceRight =false;}
+        if(Input.GetAxisRaw("Horizontal")>0){faceRight = true;Debug.Log("I'm facing right");}
+        else if(Input.GetAxisRaw("Horizontal")<0) { faceRight =false;}
     }
     void JumpAction()
     {
@@ -78,5 +79,19 @@ public class Jerryzhao : MonoBehaviour
         playerRigid.velocity = new Vector2(move, playerRigid.velocity.y);
         }
 
+    }
+    void AttackSpecial(){
+        if(Input.GetKeyDown(KeyCode.J) && canJump == true){
+        _anim.Play("animAttack2");
+        }
+    }
+
+        void Attack(){
+        if(Input.GetKeyDown(KeyCode.J) && canJump == true){
+        _anim.Play("animAttack2");
+        }
+        if(Input.GetKeyDown(KeyCode.K) && canJump == true){
+        _anim.Play("animAttack");
+        }
     }
 }
